@@ -1,0 +1,32 @@
+﻿<Window x:Class="Stolovaya_1._0.res.admin.panels.typeProductsManipulate"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+        mc:Ignorable="d"
+        Title="xxx" Width="450" Height="220" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 5, 0"/>
+        <TextBox FontSize="16" VerticalContentAlignment="Center" x:Name="name_tb" Grid.Row="0" Grid.Column="1" Height="25" Margin="5, 0, 5, 0" MaxLength="50" PreviewTextInput="name_tb_PreviewTextInput"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Цена:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 5, 0"/>
+        <TextBox FontSize="16" VerticalContentAlignment="Center" x:Name="price_tb" Grid.Row="1" Grid.Column="1" Margin="5, 5, 5, 5" MaxLength="10" TextWrapping="Wrap" PreviewTextInput="price_tb_PreviewTextInput"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Тип измерения:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 5, 0"/>
+        <ComboBox Grid.Row="2" Grid.Column="1" x:Name="search_type_cb" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5,0,5,0" SelectedIndex="0" FontSize="16" DisplayMemberPath="name" SelectedValuePath="id"/>
+
+        <Button x:Name="save_btn" Grid.Column="1" Grid.Row="3" Margin="20, 5, 20, 5" Click="save_btn_Click" Content="Сохранить"/>
+    </Grid>
+</Window>

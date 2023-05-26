@@ -1,0 +1,63 @@
+﻿<Page x:Class="Stolovaya_1._0.res.admin.panels.decommissionedProducts"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+      xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+      mc:Ignorable="d"      
+      Title="decommissionedProducts">
+
+    <Grid x:Name="mamkaTvoya">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*" x:Name="widTB"/>
+            <ColumnDefinition x:Name="widCB"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Поиск: " FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" x:Name="search_tb" KeyUp="search_tb_KeyUp" VerticalAlignment="Center" MinWidth="350" HorizontalAlignment="Stretch" Margin="5, 0, 5, 0" FontSize="18" PreviewTextInput="search_tb_PreviewTextInput"/>
+        <ComboBox Grid.Column="2" x:Name="search_type_cb" HorizontalAlignment="Stretch" VerticalAlignment="Center"  SelectedIndex="0" MinWidth="150" Margin="5, 0, 5, 0" FontSize="18">
+            <ComboBoxItem>По ID</ComboBoxItem>
+            <ComboBoxItem>По наименованию</ComboBoxItem>
+            <ComboBoxItem>По дате начала хранения</ComboBoxItem>
+            <ComboBoxItem>По дате окончания хранения</ComboBoxItem>
+            <ComboBoxItem>По количеству</ComboBoxItem>
+            <ComboBoxItem>По единиче измерения</ComboBoxItem>
+            <ComboBoxItem>По причине</ComboBoxItem>
+            <ComboBoxItem>По описанию</ComboBoxItem>
+            <ComboBoxItem>По ФИО списавшего</ComboBoxItem>
+            <ComboBoxItem>По дате списания</ComboBoxItem>
+        </ComboBox>
+
+        <DataGrid x:Name="mainDG" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=mamkaTvoya, Path=ActualWidth}" AutoGenerateColumns="False"  CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"                     Binding="{Binding Path=id_product_storage}"     Width="auto" />
+                <DataGridTextColumn Header="Наименование"           Binding="{Binding Path=id_type_product.name}"   Width="auto" />
+                <DataGridTextColumn Header="Начало хранения"        Binding="{Binding Path=date_start}"             Width="auto" />
+                <DataGridTextColumn Header="Окончание хранения"     Binding="{Binding Path=date_end}"               Width="auto" />
+                <DataGridTextColumn Header="Количество"             Binding="{Binding Path=count}"                  Width="auto" />
+                <DataGridTextColumn Header="Ед. изм."               Binding="{Binding Path=id_unit.name}"           Width="auto" />
+                <DataGridTextColumn Header="Причина списания"       Binding="{Binding Path=id_reason.name}"         Width="auto" />
+                <DataGridTextColumn Header="Описание"               Binding="{Binding Path=description}"            Width="auto" />
+                <DataGridTextColumn Header="Кто списал"             Binding="{Binding Path=whoDecommissioned.fio}"  Width="auto" />
+                <DataGridTextColumn Header="Дата списания"          Binding="{Binding Path=whenDecommissioned}"     Width="auto" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Image x:Name="loading_anim"  gif:AnimationBehavior.SourceUri="pack://application:,,,/res/pics/loading_animation.gif" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Width="100"/>
+
+        
+        <fix:AlignableWrapPanel HorizontalContentAlignment="Center" Grid.Row="2" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+            <Button x:Name="update_btn" Click="update_btn_Click" Content="Обновить" Width="100" Margin="0, 0, 10, 0"/>
+            <Button x:Name="back_btn" Click="back_btn_Click" Content="Назад..." Width="100" Height="25"/>
+        </fix:AlignableWrapPanel>
+    </Grid>
+</Page>

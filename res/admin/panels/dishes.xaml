@@ -1,0 +1,50 @@
+﻿<Page x:Class="Stolovaya_1._0.res.admin.panels.dishes"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+      xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif" 
+      mc:Ignorable="d" 
+      Title="dishes">
+
+    <Grid x:Name="mamkaTvoya"> 
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*" x:Name="widTB"/>
+            <ColumnDefinition x:Name="widCB"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Поиск: " FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox Grid.Column="1" x:Name="search_tb" KeyUp="search_tb_KeyUp" VerticalAlignment="Center" MinWidth="350" HorizontalAlignment="Stretch" Margin="5, 0, 5, 0" FontSize="18" PreviewTextInput="search_tb_PreviewTextInput"/>
+        <ComboBox Grid.Column="2" x:Name="search_type_cb" HorizontalAlignment="Stretch" VerticalAlignment="Center"  SelectedIndex="0" MinWidth="150" Margin="5, 0, 5, 0" FontSize="18">
+            <ComboBoxItem>По ID</ComboBoxItem>
+            <ComboBoxItem>По наименованию</ComboBoxItem>
+            <ComboBoxItem>По цене</ComboBoxItem>
+        </ComboBox>
+
+        <DataGrid x:Name="mainDG" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=mamkaTvoya, Path=ActualWidth}" AutoGenerateColumns="False"  CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"                     Binding="{Binding Path=id_dish}"     Width="auto"/>
+                <DataGridTextColumn Header="Наименование"           Binding="{Binding Path=name_dish}"   Width="auto" />
+                <DataGridTextColumn Header="Цена"                   Binding="{Binding Path=price}"             Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Image x:Name="loading_anim"  gif:AnimationBehavior.SourceUri="pack://application:,,,/res/pics/loading_animation.gif" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Width="100"/>
+
+        <fix:AlignableWrapPanel HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+            <Button Grid.Row="2" Content="Обновить"                         Margin="0, 0, 5, 0" Width="100" x:Name="update_btn"     Click="update_btn_Click"    HorizontalAlignment="Left" Height="30"/>
+            <Button Grid.Row="2" Content="Добавить"                         Margin="0, 0, 5, 0" Width="100" x:Name="add_btn"        Click="add_btn_Click"       HorizontalAlignment="Left"/>
+            <Button Grid.Row="2" Content="Редактировать"                    Margin="0, 0, 5, 0" Width="110" x:Name="edit_btn"       Click="edit_btn_Click"      HorizontalAlignment="Left"/>
+            <Button Grid.Row="2" Content="Удалить"                          Margin="0, 0, 5, 0" Width="100" x:Name="delete_btn"     Click="delete_btn_Click"    HorizontalAlignment="Left"/>
+        </fix:AlignableWrapPanel>
+    </Grid>
+</Page>

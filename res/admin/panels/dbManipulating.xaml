@@ -1,0 +1,28 @@
+﻿<Window x:Class="Stolovaya_1._0.res.admin.panels.dbManipulating"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+        mc:Ignorable="d"
+        Title="xxx" Height="300" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="3*" x:Name="gr"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 5, 0"/>
+        <TextBox x:Name="name_tb" Grid.Row="0" Grid.Column="1" Height="25" Margin="5, 0, 5, 0" MaxLength="50"/>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Описание:" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 5, 0"/>
+        <TextBox x:Name="desc_tb" Grid.Row="1" Grid.Column="1" Margin="5, 5, 5, 5" MaxLength="100" TextWrapping="Wrap"/>
+
+        <Button x:Name="save_btn" Grid.Column="1" Grid.Row="2" Margin="20, 5, 20, 5" Click="save_btn_Click" Content="Сохранить"/>
+    </Grid>
+</Window>

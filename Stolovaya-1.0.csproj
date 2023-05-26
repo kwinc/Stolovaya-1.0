@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <RootNamespace>Stolovaya_1._0</RootNamespace>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>res\pics\icon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="res\fonts\bold\Montserrat-Bold.ttf" />
+    <None Remove="res\fonts\reg\Montserrat-Regular.ttf" />
+    <None Remove="res\pics\arrow-down-navigate.png" />
+    <None Remove="res\pics\icon.ico" />
+    <None Remove="res\pics\loading_animation.gif" />
+    <None Remove="res\pics\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="res\pics\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="XamlAnimatedGif" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="res\fonts\bold\Montserrat-Bold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\fonts\reg\Montserrat-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\arrow-down-navigate.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\logo.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\loading_animation.gif">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

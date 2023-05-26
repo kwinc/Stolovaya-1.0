@@ -1,0 +1,57 @@
+﻿<Window x:Class="Stolovaya_1._0.res.admin.mainAdminPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stolovaya_1._0.res.admin"
+        xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+        mc:Ignorable="d"
+        Title="Информационная система заведующего столовой - Заведующий столовой" Height="450" Width="800" MinWidth="800" MinHeight="450" Loaded="Window_Loaded" x:Name="mainWIn" WindowStartupLocation="CenterScreen">
+    <Grid Name="canvas">
+        <Grid Width="{Binding ElementName=canvas, Path=ActualWidth}" Height="{Binding ElementName=canvas, Path=ActualHeight}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Информационная система заведующего столовой" x:Name="mainSign" Margin="10, 0, 0, 0" Grid.Row="1" FontFamily="/res/fonts/bold/#Montserrat" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" />
+            <Frame Grid.Row="2" x:Name="main_content" NavigationUIVisibility="Hidden" Margin="10, 0, 10, 0"/>
+        </Grid>
+        <StackPanel x:Name="controlPanel" Width="784" Height="100" VerticalAlignment="Top">
+            <Border BorderBrush="{StaticResource grayBG}" Padding="0, 0, 0, 0" Background="{StaticResource blueBG}" Height="{Binding ElementName=controlPanel, Path=Height}" x:Name="brd" CornerRadius="0, 0, 10, 10" BorderThickness="3, 0, 3, 3">
+                <Grid x:Name="chGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fix:AlignableWrapPanel HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="2">
+                        <TextBlock x:Name="fio_txt" Text="Фамилия Имя Отчество" Foreground="#FFF" FontSize="20" Margin="0, 5, 0, 0"/>
+                    </fix:AlignableWrapPanel>
+                    
+                    <fix:AlignableWrapPanel HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0" Grid.Column="0">
+                        <Button x:Name="orders_btn"     Click="orders_btn_Click"    Content="Заказы"        Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                        <Button x:Name="personal_btn"   Click="personal_btn_Click"  Content="Персонал"      Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                        <Button x:Name="foodstuff_btn"  Click="foodstuff_btn_Click" Content="Продукты"      Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                        <Button x:Name="meals_btn"      Click="meals_btn_Click"     Content="Блюда"         Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                        <Button x:Name="menu_btn"       Click="menu_btn_Click"      Content="Меню на день"  Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                        <Button x:Name="reports_btn"    Click="reports_btn_Click"   Content="Отчёты"        Width="100" Height="30" Margin="0, 0, 5, 0"/>
+                    </fix:AlignableWrapPanel>
+
+                    <fix:AlignableWrapPanel HorizontalContentAlignment="Center" Grid.Column="1" VerticalAlignment="Bottom">
+                        <Button x:Name="deauth_btn" Click="deauth_btn_Click" Height="30" Width="100" Content="Выход" Style="{StaticResource exitBtn}"/>
+                    </fix:AlignableWrapPanel>
+
+                    <Button x:Name="navigateMenuOpenClose" Grid.Row="1" Style="{StaticResource transparentBtn}" Width="{Binding ElementName=chGrid, Path=ActualWidth}" Click="navigateMenuOpenClose_Click">
+                        <Button.Content>
+                            <Image Grid.Row="1" Source="/res/pics/arrow-down-navigate.png"/>
+                        </Button.Content>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Window>
