@@ -52,6 +52,7 @@
             <Button Grid.Row="2" Content="Добавить"      Margin="0, 0, 5, 0" Width="100" x:Name="add_btn"       Click="add_btn_Click"       HorizontalAlignment="Left"/>
             <Button Grid.Row="2" Content="Редактировать" Margin="0, 0, 5, 0" Width="100" x:Name="edit_btn"      Click="edit_btn_Click"      HorizontalAlignment="Left"/>
             <Button Grid.Row="2" Content="Удалить"       Margin="0, 0, 5, 0" Width="100" x:Name="delete_btn"    Click="delete_btn_Click"    HorizontalAlignment="Left"/>
+            <Button Grid.Row="2" Content="Экспорт в Word"       Margin="0, 0, 5, 0" Width="100" x:Name="export_btn"    Click="export_btn_Click"    HorizontalAlignment="Left"/>
         </fix:AlignableWrapPanel>
     </Grid>
 </Page>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows;
 
 namespace Stolovaya_1._0.res.libs
 {
@@ -24,6 +25,8 @@ namespace Stolovaya_1._0.res.libs
             double age = Math.Round(System.DateTime.Now.Subtract(birthDate).TotalDays / 365.25, 2);
             return (age > minAge);
         }
+
+        
 
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -36,7 +37,6 @@ namespace Stolovaya_1._0.res.admin.panels
         {
             List<person> tmp = new List<person>();
             DataTable personalFromDB = libs.dbc.Select($"SELECT * FROM dbo.personal");
-
             await Task.Run(() =>
             {
                 for (int i = 0; i < personalFromDB.Rows.Count; i++)
@@ -103,6 +103,7 @@ namespace Stolovaya_1._0.res.admin.panels
         }
         private void add_btn_Click(object sender, RoutedEventArgs e)
         {
+            
             this.NavigationService.Navigate(new personalManipulating(false));
         }
         private void edit_btn_Click(object sender, RoutedEventArgs e)
@@ -135,6 +136,13 @@ namespace Stolovaya_1._0.res.admin.panels
             {
                 MessageBox.Show("Не выбран пользователь", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }        
+        }
+
+        private async void export_btn_Click(object sender, RoutedEventArgs e)
+        {
+            loading_anim.Visibility = Visibility.Visible;
+            await asyncs.ExportToWord(asyncs.DataGridtoDataTable(mainDG));
+            loading_anim.Visibility = Visibility.Hidden;
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stolovaya_1._0.res.libs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -41,6 +42,12 @@ namespace Stolovaya_1._0.res.admin.panels
                     break;
                 }
             }
+        }
+        private async void export_btn_Click(object sender, RoutedEventArgs e)
+        {
+            loading_anim.Visibility = Visibility.Visible;
+            await asyncs.ExportToWord(asyncs.DataGridtoDataTable(mainDG));
+            loading_anim.Visibility = Visibility.Hidden;
         }
         private void search_tb_KeyUp(object sender, KeyEventArgs e)
         {

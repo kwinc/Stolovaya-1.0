@@ -29,7 +29,12 @@ namespace Stolovaya_1._0.res.admin.panels
             InitializeComponent();
             update_btn_Click(null, null);
         }
-
+        private async void export_btn_Click(object sender, RoutedEventArgs e)
+        {
+            loading_anim.Visibility = Visibility.Visible;
+            await asyncs.ExportToWord(asyncs.DataGridtoDataTable(mainDG));
+            loading_anim.Visibility = Visibility.Hidden;
+        }
         async Task<List<ordersS>> getProducts()
         {
             List<ordersS> tmp = new List<ordersS>();

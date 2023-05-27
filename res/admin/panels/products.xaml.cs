@@ -31,6 +31,12 @@ namespace Stolovaya_1._0.res.admin.panels
             update_btn_Click(null, null); //говнокодер
 
         }
+        private async void export_btn_Click(object sender, RoutedEventArgs e)
+        {
+            loading_anim.Visibility = Visibility.Visible;
+            await asyncs.ExportToWord(asyncs.DataGridtoDataTable(mainDG));
+            loading_anim.Visibility = Visibility.Hidden;
+        }
         async Task<List<product_storage>> getProducts()
         {
             List<product_storage> tmp = new List<product_storage>();

@@ -52,6 +52,7 @@
             <Button Grid.Row="2" Content="Удалить"                          Margin="0, 0, 5, 0" Width="60" x:Name="delete_btn"     Click="delete_btn_Click"    HorizontalAlignment="Left"/>
             <Button Grid.Row="2" Content="Управление типами"                Margin="0, 0, 5, 0" Width="140" x:Name="man_type_btn"  Click="man_type_btn_Click"  HorizontalAlignment="Left"/>
             <!--Button Grid.Row="2" Content="Просмотр списанных продуктов"     Margin="0, 0, 5, 0" Width="250" x:Name="man_dec_btn"   Click="man_dec_btn_Click"   HorizontalAlignment="Left"/-->
+            <Button Grid.Row="2" Content="Экспорт в Word"       Margin="0, 0, 5, 0" Width="100" x:Name="export_btn"    Click="export_btn_Click"    HorizontalAlignment="Left"/>
         </fix:AlignableWrapPanel>
     </Grid>
 </Page>
