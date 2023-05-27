@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Printing;
 using System.Text.Json;
 using System.Windows.Documents;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using Xceed.Wpf.Toolkit.PropertyGrid.Converters;
 
@@ -51,15 +53,11 @@ namespace Stolovaya_1._0
     public struct decommissioned_product
     {
         public int id_decommission { get; set; }
-
-
         public type_product id_type_product { get; set; }
         public DateTime date_start { get; set; }
         public DateTime date_end { get; set; }
         public double count { get; set; }
         public idParam id_unit { get; set; }
-
-
         public idParam id_reason { get; set; }
         public string description { get; set; }
         public person whoDecommissioned { get; set; }
@@ -80,6 +78,14 @@ namespace Stolovaya_1._0
         public int id_menu { get; set; }
         public dish[] dishes { get; set; }
         public DateTime date { get; set; }
+    }
+    public struct ordersS
+    {
+        public int id_order { get; set; }
+        public dish[] dishes { get; set; }
+        public double price { get; set; }
+        public DateTime date { get; set; }
+        public string namesDishes { get; set; }
     }
 /*Person tom = new Person("Tom", 37);
   string json = JsonSerializer.Serialize(tom);

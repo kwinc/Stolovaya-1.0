@@ -73,8 +73,6 @@ namespace Stolovaya_1._0.res.admin.panels
                     mainPic.Source = logo;
                 }
                 List<string> products = JsonSerializer.Deserialize<List<string>>(c.products);
-
-
                 foreach (var param in products)
                 {
                     var p = new WrapPanel() { HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch, Width = 200 };
@@ -83,12 +81,9 @@ namespace Stolovaya_1._0.res.admin.panels
                     panels.Add(countPanels, p);
                     listbox.Items.Add(panels[countPanels]);
                     countPanels++;
-                }
-                
+                }                
             }
-
         }
-
         private void save_btn_Click(object sender, RoutedEventArgs e)
         {
             if (countPanels == 0) {
