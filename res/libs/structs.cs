@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using System.Windows.Documents;
+using System.Windows.Media.Imaging;
 using Xceed.Wpf.Toolkit.PropertyGrid.Converters;
 
 namespace Stolovaya_1._0
@@ -70,12 +71,15 @@ namespace Stolovaya_1._0
         public string name_dish { get; set; }
         public double price { get; set; }
         public string products { get; set; }
+        public double weight { get; set; }
+        public byte[] picture { get; set; }
+        public BitmapImage readyPic { get; set; }
     }
-
-    public struct pizdec
+    public struct dailyMenuS
     {
-        public object o1 { get; set;}
-        public idParam o2 { get; set;}
+        public int id_menu { get; set; }
+        public dish[] dishes { get; set; }
+        public DateTime date { get; set; }
     }
 /*Person tom = new Person("Tom", 37);
   string json = JsonSerializer.Serialize(tom);

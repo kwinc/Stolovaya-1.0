@@ -11,7 +11,7 @@ namespace Stolovaya_1._0.res.libs
         {
             DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
             SqlConnection sqlConnection;                                       // подключаемся к базе данных
-            sqlConnection = new SqlConnection($"server={connectionString};Trusted_Connection=Yes;DataBase=stolovka;");
+            sqlConnection = new SqlConnection(connectionString);
             SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
             sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик

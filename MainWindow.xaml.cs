@@ -61,7 +61,7 @@ namespace Stolovaya_1._0
 
         private void server_tb_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
-            res.libs.dbc.connectionString = server_tb.Text;
+            res.libs.dbc.connectionString = $"server={server_tb.Text};Trusted_Connection=Yes;DataBase=stolovka;";
         }
     }
 }

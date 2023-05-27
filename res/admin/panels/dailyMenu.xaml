@@ -1,0 +1,57 @@
+﻿<Page x:Class="Stolovaya_1._0.res.admin.panels.dailyMenu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+      mc:Ignorable="d"
+      xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif"  
+      Title="dailyMenu">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="mainItems" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="{StaticResource blueBG}" BorderThickness="2" CornerRadius="3" Grid.Column="0" Grid.Row="0">
+                            <Image Source="{Binding Path=readyPic}" Height="100" Width="150" Stretch="Uniform"/>
+                        </Border>
+
+                        <WrapPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0" Margin="5">
+                            <TextBlock FontSize="16" Text="{Binding Path=name_dish}" FontFamily="/res/fonts/bold/#Montserrat"/>
+                            <WrapPanel Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="{Binding Path=price,  StringFormat='Цена: {0} рублей.'}"/>
+                                <TextBlock FontSize="14" Text="{Binding Path=weight, StringFormat=' Порция: {0} гр.'}"/>
+                            </WrapPanel>
+                            
+                        </WrapPanel>
+                        
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Image x:Name="loading_anim"  gif:AnimationBehavior.SourceUri="pack://application:,,,/res/pics/loading_animation.gif" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Width="100"/>
+
+        <WrapPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button x:Name="update_btn" Click="update_btn_Click" Content="Обновить" Height="30" Width="100" Margin="5, 0, 5, 0"/>
+            <Button x:Name="add_btn"    Click="add_btn_Click"    Content="Добавить" Height="30" Width="100" Margin="5, 0, 5, 0"/>
+            <Button x:Name="delete_btn" Click="delete_btn_Click" Content="Удалить"  Height="30" Width="100" Margin="5, 0, 5, 0"/>            
+        </WrapPanel>
+        
+        
+        
+    </Grid>
+</Page>

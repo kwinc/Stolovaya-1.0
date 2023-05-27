@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
         mc:Ignorable="d"
-        Title="Добавление блюда" Width="650" Height="350" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Добавление блюда" Width="650" Height="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="30"/>
@@ -23,19 +25,24 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock FontSize="16" Text="Наименование: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"/>
-        <TextBox FontSize="16" x:Name="name_tb" MaxLength="50" Grid.Row="1" Grid.Column="1" Margin="5,2,5,2" Grid.ColumnSpan="2"/>
+        <TextBox FontSize="16" x:Name="name_tb" MaxLength="50" Grid.Row="1" Grid.Column="1" Margin="5,2,5,2" />
 
         <TextBlock FontSize="16" Text="Цена: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Grid.Column="0"/>
-        <TextBox FontSize="16" x:Name="price_tb" MaxLength="50" Grid.Row="2" Grid.Column="1" Margin="5,2,5,2" Grid.ColumnSpan="2"/>
+        <TextBox FontSize="16" x:Name="price_tb" MaxLength="50" Grid.Row="2" Grid.Column="1" Margin="5,2,5,2" />
 
-        <TextBlock FontSize="16" Text="Продукты: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
-        <ListBox x:Name="listbox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="3" Grid.Column="1" Margin="5">
-        </ListBox>
+        <TextBlock FontSize="16" Text="Порция, гр: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="3" Grid.Column="0"/>
+        <TextBox FontSize="16" x:Name="weight_tb" MaxLength="50" Grid.Row="3" Grid.Column="1" Margin="5,2,5,2" />
 
-        <Button FontSize="16" x:Name="add_btn"    Click="add_btn_Click"       Grid.Column="2" Grid.Row="3" Height="30" Content="Добавить" Margin="5, 25, 5, 0" VerticalAlignment="Top"/>
-        <Button FontSize="16" x:Name="delete_btn" Click="delete_btn_Click"    Grid.Column="2" Grid.Row="3" Height="30" Content="Удалить"  Margin="5, 0, 5, 25" VerticalAlignment="Bottom"/>
+        <TextBlock FontSize="16" Text="Изображение: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="4" Grid.Column="0"/>
+        <Button x:Name="imp_pick_btn" Click="imp_pick_btn_Click" Grid.Column="1" Grid.Row="4" Height="25" FontSize="14" Content="Выбрать фотографию" Margin="5, 2, 5, 2"/>
+        <Image x:Name="mainPic" Grid.RowSpan="5" Grid.Column="2" Margin="5"/>
 
-        <Button x:Name="save_btn" Click="save_btn_Click" Grid.Column="1" Grid.Row="4" Height="30" FontSize="16" Content="Сохранить"/>
+        <TextBlock FontSize="16" Text="Продукты: " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="5" Grid.Column="0"/>
+        <ListBox x:Name="listbox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="5" Grid.Column="1" Margin="5"/>
+        <Button FontSize="16" x:Name="add_btn"    Click="add_btn_Click"       Grid.Column="2" Grid.Row="5" Height="30" Content="Добавить" Margin="5, 25, 5, 0" VerticalAlignment="Top"/>
+        <Button FontSize="16" x:Name="delete_btn" Click="delete_btn_Click"    Grid.Column="2" Grid.Row="5" Height="30" Content="Удалить"  Margin="5, 0, 5, 25" VerticalAlignment="Bottom"/>
+
+        <Button x:Name="save_btn" Click="save_btn_Click" Grid.Column="1" Grid.Row="6" Height="30" FontSize="16" Content="Сохранить"/>
 
     </Grid>
 </Window>

@@ -34,7 +34,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID"                     Binding="{Binding Path=id_dish}"     Width="auto"/>
                 <DataGridTextColumn Header="Наименование"           Binding="{Binding Path=name_dish}"   Width="auto" />
-                <DataGridTextColumn Header="Цена"                   Binding="{Binding Path=price}"             Width="*" />
+                <DataGridTextColumn Header="Цена"                   Binding="{Binding Path=price}"       Width="auto" />
+                <DataGridTextColumn Header="Порнция, гр"            Binding="{Binding Path=weight}"      Width="*" />
             </DataGrid.Columns>
         </DataGrid>
 

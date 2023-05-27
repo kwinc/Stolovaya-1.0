@@ -138,7 +138,18 @@ namespace Stolovaya_1._0.res.admin
 
         private void menu_btn_Click(object sender, RoutedEventArgs e)
         {
+            mainSign.Text = $"Меню на {DateTime.Now.ToString("dd.MM.yyyy")}";
+            main_content.Navigate(new dailyMenu());
 
+            controlPanel.RenderTransform = new TranslateTransform();
+            var translateY = new DoubleAnimation
+            {
+                From = 0,
+                To = -80,
+                Duration = TimeSpan.FromSeconds(0.15),
+            };
+            ((TranslateTransform)controlPanel.RenderTransform).BeginAnimation(TranslateTransform.YProperty, translateY);
+            IsToggle = false;
         }
 
         private void dbControl_btn_Click(object sender, RoutedEventArgs e)

@@ -1,21 +1,17 @@
-﻿using Stolovaya_1._0.res.libs;
-using System;
+﻿using Microsoft.Win32;
+using Stolovaya_1._0.res.libs;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography.Xml;
+using System.Data.SqlClient;
+using System.IO;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System;
 
 namespace Stolovaya_1._0.res.admin.panels
 {
@@ -29,6 +25,9 @@ namespace Stolovaya_1._0.res.admin.panels
         dish currC;
         Dictionary<int, WrapPanel> panels = new Dictionary<int, WrapPanel>();
         int countPanels = 0;
+        bool imgFlag = false;
+        byte[] currentPic;
+        BitmapImage logo = new BitmapImage();
         public dishManipulate(bool isEdit, dish c = new dish())
         {
             isE = isEdit;
@@ -53,13 +52,26 @@ namespace Stolovaya_1._0.res.admin.panels
             #endregion
 
             InitializeComponent();
-            
+
+            logo = new BitmapImage(new Uri("pack://application:,,,/res/pics/image-error.png"));
 
             if (isEdit)
             {
                 this.Title = "Редактирование блюда";
                 name_tb.Text = c.name_dish;
                 price_tb.Text = c.price.ToString();
+                weight_tb.Text = c.weight.ToString();
+                if (c.picture != null)
+                {
+                    imgFlag = true;
+                    imp_pick_btn.Content = "Удалить фотографию";
+                    currentPic = c.picture;
+                    mainPic.Source = ByteImage.Convert(ByteImage.GetImageFromByteArray(currentPic));
+                }
+                else
+                {                    
+                    mainPic.Source = logo;
+                }
                 List<string> products = JsonSerializer.Deserialize<List<string>>(c.products);
 
 
@@ -105,13 +117,48 @@ namespace Stolovaya_1._0.res.admin.panels
             //MessageBox.Show(json);
             if (!isE)
             {
-                dbc.Select($"INSERT INTO dbo.dishes (name_dish, price, products) VALUES ('{name_tb.Text}', '{price_tb.Text.Replace(',', '.')}', '{json}')");
+                if (currentPic != null)
+                {
+                    string connectionString = dbc.connectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString)) // создаем подключение
+                    {
+                        connection.Open(); // откроем подключение
+                        SqlCommand command = new SqlCommand(); // создадим запрос
+                        command.Connection = connection; // дадим запросу подключение
+                        command.CommandText = @$"INSERT INTO dbo.dishes (name_dish, price, products, weight, picture) VALUES ('{name_tb.Text}', '{price_tb.Text.Replace(',', '.')}', '{json}', '{weight_tb.Text.Replace(',', '.')}', @ImageData)"; // пропишем запрос
+                        command.Parameters.Add("@ImageData", SqlDbType.Image, 1000000);
+                        command.Parameters["@ImageData"].Value = currentPic;// скалярной переменной ImageData присвоем массив байтов
+                        command.ExecuteNonQuery(); // запустим
+                    }
+                }
+                else
+                {
+                    dbc.Select($"INSERT INTO dbo.dishes (name_dish, price, products, weight, picture) VALUES ('{name_tb.Text}', '{price_tb.Text.Replace(',', '.')}', '{json}', '{weight_tb.Text.Replace(',', '.')}', NULL)");
+                }
                 MessageBox.Show("Сохранено");
                 this.Close();
             }
             else
             {
-                dbc.Select($"UPDATE dbo.dishes SET name_dish = '{name_tb.Text}', price = '{price_tb.Text.Replace(',', '.')}', products = '{json}' WHERE id_dish = {currC.id_dish}");
+                if (currentPic != null)
+                {
+                    string connectionString = dbc.connectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString)) // создаем подключение
+                    {
+                        connection.Open(); // откроем подключение
+                        SqlCommand command = new SqlCommand(); // создадим запрос
+                        command.Connection = connection; // дадим запросу подключение
+                        command.CommandText = @$"UPDATE dbo.dishes SET name_dish = '{name_tb.Text}', price = '{price_tb.Text.Replace(',', '.')}', products = '{json}', weight = '{weight_tb.Text.Replace(',', '.')}', picture = @ImageData WHERE id_dish = {currC.id_dish}"; // пропишем запрос
+                        command.Parameters.Add("@ImageData", SqlDbType.Image, 1000000);
+                        command.Parameters["@ImageData"].Value = currentPic;// скалярной переменной ImageData присвоем массив байтов
+                        command.ExecuteNonQuery(); // запустим
+                    }
+                }
+                else
+                {
+                    dbc.Select($"UPDATE dbo.dishes SET name_dish = '{name_tb.Text}', price = '{price_tb.Text.Replace(',', '.')}', products = '{json}', weight = '{weight_tb.Text.Replace(',', '.')}', picture = NULL WHERE id_dish = {currC.id_dish}");
+                }
+
                 MessageBox.Show("Сохранено");
                 this.Close();
             }
@@ -135,6 +182,27 @@ namespace Stolovaya_1._0.res.admin.panels
                 listbox.Items.RemoveAt(listbox.SelectedIndex);
                 listbox.SelectedIndex = -1;
                 countPanels--;
+            }
+        }
+        private void imp_pick_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (imgFlag)
+            {
+                currentPic = null;
+                imgFlag = false;
+                imp_pick_btn.Content = "Прикрепить фотографию";
+                mainPic.Source = logo;
+            }
+            else
+            {
+                OpenFileDialog d = new OpenFileDialog();
+                d.Filter = "PNG (*.png)|*.png|Все файлы (*.*)|*.*";
+                if (d.ShowDialog() == false)
+                    return;
+                currentPic = File.ReadAllBytes(d.FileName);
+                imgFlag = true;
+                imp_pick_btn.Content = "Удалить фотографию";
+                mainPic.Source = ByteImage.Convert(ByteImage.GetImageFromByteArray(currentPic));
             }
         }
     }

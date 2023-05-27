@@ -14,6 +14,7 @@
     <None Remove="res\fonts\reg\Montserrat-Regular.ttf" />
     <None Remove="res\pics\arrow-down-navigate.png" />
     <None Remove="res\pics\icon.ico" />
+    <None Remove="res\pics\image-error.png" />
     <None Remove="res\pics\loading_animation.gif" />
     <None Remove="res\pics\logo.png" />
   </ItemGroup>
@@ -26,6 +27,7 @@
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <PackageReference Include="XamlAnimatedGif" Version="2.1.1" />
   </ItemGroup>
 
@@ -40,6 +42,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\pics\icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\image-error.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\pics\logo.png">

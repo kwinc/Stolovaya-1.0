@@ -1,0 +1,47 @@
+﻿<Window x:Class="Stolovaya_1._0.res.admin.panels.dailyMenuAdd"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+        mc:Ignorable="d"
+        xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+        xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif" 
+        Title="Добавить блюдо в меню" Height="400" Width="600" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="2*" x:Name="widTB"/>
+            <ColumnDefinition x:Name="widCB"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock  Grid.Column="0" Grid.Row="0" Text="Поиск: " FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox    Grid.Column="1" x:Name="search_tb" KeyUp="search_tb_KeyUp" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="5, 0, 5, 0" FontSize="18" PreviewTextInput="search_tb_PreviewTextInput"/>
+        <ComboBox   Grid.Column="2" x:Name="search_type_cb" HorizontalAlignment="Stretch" VerticalAlignment="Center"  SelectedIndex="0" Margin="5, 0, 5, 0" FontSize="18">
+            <ComboBoxItem>По ID</ComboBoxItem>
+            <ComboBoxItem>По наименованию</ComboBoxItem>
+            <ComboBoxItem>По цене</ComboBoxItem>
+        </ComboBox>
+
+        <DataGrid SelectionChanged="mainDG_SelectionChanged" x:Name="mainDG" Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="{Binding ElementName=mamkaTvoya, Path=ActualWidth}" AutoGenerateColumns="False"  CanUserResizeRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID"                     Binding="{Binding Path=id_dish}"     Width="auto"/>
+                <DataGridTextColumn Header="Наименование"           Binding="{Binding Path=name_dish}"   Width="auto" />
+                <DataGridTextColumn Header="Цена"                   Binding="{Binding Path=price}"       Width="auto" />
+                <DataGridTextColumn Header="Порнция, гр"            Binding="{Binding Path=weight}"      Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Image x:Name="loading_anim"  gif:AnimationBehavior.SourceUri="pack://application:,,,/res/pics/loading_animation.gif" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" Visibility="Hidden" Width="100"/>
+
+        <fix:AlignableWrapPanel HorizontalContentAlignment="Center" Grid.Row="2" Grid.ColumnSpan="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+            <Button Grid.Row="2" Content="Добавить" Margin="0, 0, 5, 0" Width="100" x:Name="add_btn" HorizontalAlignment="Left" Height="30" Click="add_btn_Click"/>
+        </fix:AlignableWrapPanel>
+    </Grid>
+</Window>

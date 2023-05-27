@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -12,19 +13,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Stolovaya_1._0.res.admin.panels
 {
     /// <summary>
-    /// Логика взаимодействия для dishes.xaml
+    /// Логика взаимодействия для dailyMenuAdd.xaml
     /// </summary>
-    public partial class dishes : Page
+    public partial class dailyMenuAdd : Window
     {
-        DataTable curUser;
-        List<dish> dishesInClass = new List<dish>();
-
         #region Методы
         private void search_tb_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -53,18 +50,19 @@ namespace Stolovaya_1._0.res.admin.panels
             }
         }
         #endregion
-        public dishes(DataTable u)
+        List<dish> dishesInClass = new List<dish>();
+        bool isSelected = false;
+        List<dailyMenuS> sT;
+        public dailyMenuAdd(List<dailyMenuS> s)
         {
             InitializeComponent();
             update_btn_Click(null, null);
-            curUser = u;
+            sT = s;
         }
-
         async Task<List<dish>> getDishes()
         {
             List<dish> tmp = new List<dish>();
             DataTable db = libs.dbc.Select($"SELECT * FROM dbo.dishes");
-
             await Task.Run(() =>
             {
                 for (int i = 0; i < db.Rows.Count; i++)
@@ -74,7 +72,7 @@ namespace Stolovaya_1._0.res.admin.panels
                         id_dish = db.Rows[i].Field<int>("id_dish"),
                         name_dish = db.Rows[i].Field<string>("name_dish"),
                         price = db.Rows[i].Field<double>("price"),
-                        products = db.Rows[i].Field<string>("products"),//JsonSerializer.Deserialize<int[]>(db.Rows[i].Field<double>("products"))
+                        products = db.Rows[i].Field<string>("products"),
                         weight = db.Rows[i].Field<double>("weight"),
                         picture = (byte[])db.Rows[i].Field<byte[]>("picture")
                     });
@@ -89,36 +87,65 @@ namespace Stolovaya_1._0.res.admin.panels
             mainDG.ItemsSource = dishesInClass;
             loading_anim.Visibility = Visibility.Hidden;
         }
-
+        List<dish> selectedDishes = new List<dish>();
         private void add_btn_Click(object sender, RoutedEventArgs e)
         {
-            dishManipulate win = new dishManipulate(false);
-            win.ShowDialog();
-            update_btn_Click(null, null);
-
+            if (mainDG.SelectedIndex != -1)
+            {
+                if (selectedDishes.Exists(p => p.id_dish == ((dish)mainDG.SelectedItem).id_dish))
+                {
+                    selectedDishes.Remove((dish)mainDG.SelectedItem);
+                    add_btn.Content = "Добавить";
+                }
+                else
+                {
+                    selectedDishes.Add((dish)mainDG.SelectedItem);
+                    add_btn.Content = "Убрать";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не выбрано блюдо", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
-        private void edit_btn_Click(object sender, RoutedEventArgs e)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            try
+            List<string> tmp = new List<string>();
+            foreach (dish v in selectedDishes)
             {
-                dishManipulate win = new dishManipulate(true, (dish)mainDG.SelectedItem);
-                win.ShowDialog();
-                update_btn_Click(null, null);
+                tmp.Add(v.id_dish.ToString());
             }
-            catch
+
+            DataTable db = libs.dbc.Select($"SELECT * FROM dbo.dailyMenu WHERE date = '{DateTime.Now.ToString("yyyy-MM-dd")}'");
+            if (db.Rows.Count == 0)
             {
-                MessageBox.Show("Не выбран элемент", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                string dishes = JsonSerializer.Serialize(tmp);
+                libs.dbc.Select($"INSERT INTO dbo.dailyMenu (dishes, date) VALUES ('{dishes}', '{DateTime.Now.ToString("yyyy-MM-dd")}')");
+            }
+            else
+            {
+                //
+                List<string> su = new List<string>();
+                su = JsonSerializer.Deserialize<List<string>>(db.Rows[0].Field<string>("dishes"));
+
+                List<string> neww = tmp;
+
+                List<string> goToDB = su.Union(neww).ToList();
+                string dishes = JsonSerializer.Serialize(goToDB);
+                libs.dbc.Select($"UPDATE dbo.dailyMenu SET dishes = '{dishes}' WHERE date = '{DateTime.Now.ToString("yyyy-MM-dd")}'");
             }
         }
 
-        private void delete_btn_Click(object sender, RoutedEventArgs e)
+        private void mainDG_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            dish tmp = (dish)mainDG.SelectedItem;
-            if (MessageBoxResult.Yes == MessageBox.Show($"Действительно удалить блюдо '{tmp.name_dish}'", "Подтверждение", MessageBoxButton.YesNo, MessageBoxImage.Question))
+            if (selectedDishes.Exists(p => p.id_dish == ((dish)mainDG.SelectedItem).id_dish))
             {
-                libs.dbc.Select($"DELETE FROM dbo.dishes WHERE id_dish = {tmp.id_dish}");
-                update_btn_Click(null, null);
+                add_btn.Content = "Убрать";
+            }
+            else
+            {
+                add_btn.Content = "Добавить";
             }
         }
     }

@@ -34,6 +34,6 @@
             </Grid>
             
         </StackPanel>
-        <TextBox x:Name="server_tb" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="300" Margin="0, 0, 0, 10" TextChanged="server_tb_TextChanged"/>
+        <TextBox x:Name="server_tb" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="300" Margin="0, 0, 0, 10" TextChanged="server_tb_TextChanged" Text="DESKTOP-SI0HINU\SQLEXPRESS"/>
     </Grid>
 </Window>
