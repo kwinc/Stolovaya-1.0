@@ -1,0 +1,39 @@
+﻿<Page x:Class="Stolovaya_1._0.res.admin.panels.reports"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Stolovaya_1._0.res.admin.panels"
+      xmlns:gif="https://github.com/XamlAnimatedGif/XamlAnimatedGif" 
+      xmlns:fix="clr-namespace:Stolovaya_1._0.res.libs"
+      mc:Ignorable="d" 
+      Title="reports">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox x:Name="report_type_cb" HorizontalAlignment="Stretch" Margin="10" Grid.Row="0" FontSize="16">
+            <ComboBox.Items>
+                <ComboBoxItem>Отчёт о продуктах с истёкшим сроком годности</ComboBoxItem>
+                <ComboBoxItem>Отчёт о заказах за период</ComboBoxItem>
+            </ComboBox.Items>
+        </ComboBox>
+        <WrapPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <TextBlock Text="С" Grid.Row="1" VerticalAlignment="Center" FontSize="16" Foreground="#fff"/>
+            <DatePicker x:Name="start_dp" Margin="5" FontSize="16"/>
+            <TextBlock Text=" по " Grid.Row="1" VerticalAlignment="Center" FontSize="16" Foreground="#fff"/>
+            <DatePicker x:Name="stop_dp" Margin="5" FontSize="16"/>
+        </WrapPanel>
+
+        <Image x:Name="loading_anim"  gif:AnimationBehavior.SourceUri="pack://application:,,,/res/pics/loading_animation.gif" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Visibility="Hidden" Width="100"/>
+
+
+        <Button x:Name="go_btn" Content="Сформировать" FontSize="16" Grid.Row="2" Height="30" HorizontalAlignment="Center" Width="140" Click="go_btn_Click"/>
+
+    </Grid>
+    
+</Page>

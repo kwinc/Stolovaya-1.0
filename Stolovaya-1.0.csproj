@@ -13,6 +13,7 @@
     <None Remove="res\fonts\bold\Montserrat-Bold.ttf" />
     <None Remove="res\fonts\reg\Montserrat-Regular.ttf" />
     <None Remove="res\pics\arrow-down-navigate.png" />
+    <None Remove="res\pics\doc.png" />
     <None Remove="res\pics\icon.ico" />
     <None Remove="res\pics\image-error.png" />
     <None Remove="res\pics\loading_animation.gif" />
@@ -51,6 +52,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\pics\arrow-down-navigate.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="res\pics\doc.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="res\pics\icon.ico">

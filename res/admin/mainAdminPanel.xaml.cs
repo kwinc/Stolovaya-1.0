@@ -181,7 +181,18 @@ namespace Stolovaya_1._0.res.admin
 
         private void reports_btn_Click(object sender, RoutedEventArgs e)
         {
+            mainSign.Text = "Формирование отчётной документации";
+            main_content.Navigate(new reports());
 
+            controlPanel.RenderTransform = new TranslateTransform();
+            var translateY = new DoubleAnimation
+            {
+                From = 0,
+                To = -80,
+                Duration = TimeSpan.FromSeconds(0.15),
+            };
+            ((TranslateTransform)controlPanel.RenderTransform).BeginAnimation(TranslateTransform.YProperty, translateY);
+            IsToggle = false;
         }
     }
 }
